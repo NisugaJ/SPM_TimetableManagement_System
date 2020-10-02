@@ -415,7 +415,7 @@
             // comboTableType
             // 
             this.comboTableType.FormattingEnabled = true;
-            this.comboTableType.Location = new System.Drawing.Point(865, 47);
+            this.comboTableType.Location = new System.Drawing.Point(512, 96);
             this.comboTableType.Name = "comboTableType";
             this.comboTableType.Size = new System.Drawing.Size(259, 28);
             this.comboTableType.TabIndex = 60;
@@ -533,6 +533,7 @@
             this.txtNoDays2.Name = "txtNoDays2";
             this.txtNoDays2.Size = new System.Drawing.Size(215, 34);
             this.txtNoDays2.TabIndex = 49;
+            this.txtNoDays2.TextChanged += new System.EventHandler(this.txtNoDays2_TextChanged);
             // 
             // label9
             // 
@@ -548,7 +549,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(650, 43);
+            this.label10.Location = new System.Drawing.Point(264, 92);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(182, 32);
             this.label10.TabIndex = 47;

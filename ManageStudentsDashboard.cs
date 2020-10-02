@@ -276,7 +276,7 @@ namespace Timetable_Management_System
         private void button9_Click(object sender, EventArgs e)
         {
             String gid = genarateGroupID(label12.Text, label5.Text, label13.Text, comboBox5.Text);
-            string txtQuery = "UPDATE year_semester SET group_no='" + Convert.ToInt32(comboBox5.Text) + "',group_id='" + gid + "' WHERE id ='" + Convert.ToInt32(label11.Text) + "'";
+            string txtQuery = "UPDATE year_semester SET group_no='" + comboBox5.Text.ToString() + "',group_id='" + gid + "' WHERE id ='" + label11.Text.ToString() + "'";
             ExecuteQuery(txtQuery);
             LoadGroupList();
         }
@@ -284,14 +284,14 @@ namespace Timetable_Management_System
         private void button7_Click(object sender, EventArgs e)
         {
             String gid = genarateGroupID(label12.Text, label5.Text, label13.Text, comboBox5.Text);
-            string txtQuery = "UPDATE year_semester SET group_no='" + Convert.ToInt32(comboBox5.Text) + "',group_id='" + gid + "' WHERE id ='" + Convert.ToInt32(label11.Text) + "'";
+            string txtQuery = "UPDATE year_semester SET group_no='" + comboBox5.Text.ToString() + "',group_id='" + gid + "' WHERE id ='" + label11.Text.ToString() + "'";
             ExecuteQuery(txtQuery);
             LoadGroupList();
         }
         //delete group
         private void button8_Click(object sender, EventArgs e)
         {
-            string txtQuery = "UPDATE year_semester SET group_no='" + null + "',group_id='" + null + "' WHERE id ='" + Convert.ToInt32(label11.Text) + "'";
+            string txtQuery = "UPDATE year_semester SET group_no='" + null + "',group_id='" + null + "' WHERE id ='" + label11.Text.ToString() + "'";
             ExecuteQuery(txtQuery);
             LoadGroupList();
         }
@@ -299,7 +299,7 @@ namespace Timetable_Management_System
         private void button12_Click(object sender, EventArgs e)
         {
             String sgid = label18.Text +"."+ comboBox7.Text;
-            string txtQuery = "UPDATE year_semester SET subgroup_no='" + Convert.ToInt32(comboBox7.Text) + "',subgroup_id='" + sgid + "' WHERE id ='" + Convert.ToInt32(label15.Text) + "'";
+            string txtQuery = "UPDATE year_semester SET subgroup_no='" + comboBox7.Text.ToString() + "',subgroup_id='" + sgid + "' WHERE id ='" + label15.Text.ToString() + "'";
             ExecuteQuery(txtQuery);
             LoadSubGroupList();
         }
@@ -307,14 +307,14 @@ namespace Timetable_Management_System
         private void button10_Click(object sender, EventArgs e)
         {
             String sgid = label18.Text + "." + comboBox7.Text;
-            string txtQuery = "UPDATE year_semester SET subgroup_no='" + Convert.ToInt32(comboBox7.Text) + "',subgroup_id='" + sgid + "' WHERE id ='" + Convert.ToInt32(label15.Text) + "'";
+            string txtQuery = "UPDATE year_semester SET subgroup_no='" + comboBox7.Text.ToString() + "',subgroup_id='" + sgid + "' WHERE id ='" + label15.Text.ToString() + "'";
             ExecuteQuery(txtQuery);
             LoadSubGroupList();
         }
         //delete sub group
         private void button11_Click(object sender, EventArgs e)
         {
-            string txtQuery = "UPDATE year_semester SET subgroup_no='" + null + "',subgroup_id='" + null + "' WHERE id ='" + Convert.ToInt32(label15.Text) + "'";
+            string txtQuery = "UPDATE year_semester SET subgroup_no='" + null + "',subgroup_id='" + null + "' WHERE id ='" + label15.Text.ToString() + "'";
             ExecuteQuery(txtQuery);
             LoadSubGroupList();
         }
@@ -322,37 +322,66 @@ namespace Timetable_Management_System
         //set year and semester
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            label8.Text = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-            comboBox1.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
-            comboBox2.Text = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+            try
+            {
+                label8.Text = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+                comboBox1.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+                comboBox2.Text = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Please select the corner");
+            }
         }
 
         //show year,semester and program
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            label9.Text = dataGridView2.SelectedRows[0].Cells[0].Value.ToString();
-            label3.Text = dataGridView2.SelectedRows[0].Cells[1].Value.ToString();
-            label10.Text = dataGridView2.SelectedRows[0].Cells[2].Value.ToString();
-            comboBox3.Text = dataGridView2.SelectedRows[0].Cells[3].Value.ToString();
+            try
+            {
+                label9.Text = dataGridView2.SelectedRows[0].Cells[0].Value.ToString();
+                label3.Text = dataGridView2.SelectedRows[0].Cells[1].Value.ToString();
+                label10.Text = dataGridView2.SelectedRows[0].Cells[2].Value.ToString();
+                comboBox3.Text = dataGridView2.SelectedRows[0].Cells[3].Value.ToString();
+            }catch(Exception ex)
+            {
+                MessageBox.Show("Please select the corner");
+            }
         }
 
         //show year,semester,program and group no
         private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            try
+            {
+
             label11.Text = dataGridView3.SelectedRows[0].Cells[0].Value.ToString();
             label12.Text = dataGridView3.SelectedRows[0].Cells[1].Value.ToString();
             label5.Text = dataGridView3.SelectedRows[0].Cells[2].Value.ToString();
             label13.Text = dataGridView3.SelectedRows[0].Cells[3].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Please select the corner");
+            }
         }
         //show year,semester,program,group no and sub group no
         private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            try
+            {
+
             label15.Text = dataGridView4.SelectedRows[0].Cells[0].Value.ToString();
             label16.Text = dataGridView4.SelectedRows[0].Cells[1].Value.ToString();
             label14.Text = dataGridView4.SelectedRows[0].Cells[2].Value.ToString();
             label7.Text = dataGridView4.SelectedRows[0].Cells[3].Value.ToString();
             label17.Text = dataGridView4.SelectedRows[0].Cells[4].Value.ToString();
             label18.Text = dataGridView4.SelectedRows[0].Cells[6].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Please select the corner");
+            }
         }
 
         private void tabControl1_DrawItem(Object sender, System.Windows.Forms.DrawItemEventArgs e)
@@ -540,26 +569,6 @@ namespace Timetable_Management_System
 
         }
 
-        private void dataGridView4_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dataGridView3_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dataGridView2_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void label11_Click(object sender, EventArgs e)
         {
 
@@ -591,11 +600,6 @@ namespace Timetable_Management_System
         }
 
         private void SubGroupNumbers_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick_2(object sender, DataGridViewCellEventArgs e)
         {
 
         }
