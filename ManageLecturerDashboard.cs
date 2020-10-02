@@ -50,7 +50,7 @@ namespace Timetable_Management_System
 
             string workingDirectory = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
-            string completePath = projectDirectory = projectDirectory + "\\images\\lecturerDefaultImage.png";
+            string completePath = ".\\lecturerDefaultImage.png";
 
             pictureBoxLecturer.Image = Image.FromFile(@""+ completePath);          
             pictureBoxLecturer.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -73,7 +73,7 @@ namespace Timetable_Management_System
 
             string workingDirectory1 = Environment.CurrentDirectory;
             string projectDirectory1 = Directory.GetParent(workingDirectory).Parent.FullName;
-            string completePath1 = projectDirectory1 = projectDirectory1 + "\\images\\lecturerDefaultImage.png";
+            string completePath1 = ".\\lecturerDefaultImage.png";
 
             pictureBoxLecturer_Edit.Image = Image.FromFile(@"" + completePath1);
             pictureBoxLecturer_Edit.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -87,7 +87,7 @@ namespace Timetable_Management_System
 
             string workingDirectory = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
-            string completePath = projectDirectory = projectDirectory + "\\images\\lecturerDefaultImage.png";
+            string completePath = ".\\lecturerDefaultImage.png";
 
             pictureBoxLecturer_Edit.Image = Image.FromFile(@"" + completePath);
             pictureBoxLecturer_Edit.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -138,7 +138,7 @@ namespace Timetable_Management_System
 
             string workingDirectory = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
-            string completePath = projectDirectory = projectDirectory + "\\images\\lecturerDefaultImage.png";
+            string completePath = ".\\lecturerDefaultImage.png";
 
             pictureBoxLecturer_Remove.Image = Image.FromFile(@"" + completePath);
             pictureBoxLecturer_Remove.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -156,7 +156,7 @@ namespace Timetable_Management_System
 
             string workingDirectory = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
-            string completePath = projectDirectory = projectDirectory + "\\images\\lecturerDefaultImage.png";
+            string completePath = ".\\lecturerDefaultImage.png";
 
             pictureBoxLecturerSearch.Image = Image.FromFile(@"" + completePath);
             pictureBoxLecturerSearch.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -381,8 +381,8 @@ namespace Timetable_Management_System
         {
             if (!imageLink.Equals("")){
                 string projectPath = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10));
-                string imageFolderPath = projectPath + "\\bin\\Debug\\images";
-                string imageFolderIsExists = projectPath + "\\bin\\Debug";
+                string imageFolderPath = ".\\";
+                string imageFolderIsExists = ".\\";
 
                 string subPath = "images"; // your code goes here
 
@@ -585,7 +585,7 @@ namespace Timetable_Management_System
 
             string workingDirectory = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
-            string completePath = projectDirectory = projectDirectory + "\\images\\lecturerDefaultImage.png";
+            string completePath =".\\lecturerDefaultImage.png";
 
             pictureBoxLecturer.Image = Image.FromFile(@"" + completePath);
             pictureBoxLecturer.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -776,7 +776,7 @@ namespace Timetable_Management_System
 
             string workingDirectory = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
-            string completePath = projectDirectory = projectDirectory + "\\images\\lecturerDefaultImage.png";
+            string completePath = ".\\lecturerDefaultImage.png";
 
             pictureBoxLecturerSearch.Image = Image.FromFile(@"" + completePath);
             pictureBoxLecturerSearch.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -1280,7 +1280,7 @@ namespace Timetable_Management_System
         {
             string workingDirectory = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
-            string completePath = projectDirectory = projectDirectory + "\\images\\lecturerDefaultImage.png";
+            string completePath = ".\\lecturerDefaultImage.png";
 
             pictureBoxLecturer_Remove.Image = Image.FromFile(@"" + completePath);
             pictureBoxLecturer_Remove.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -1412,7 +1412,7 @@ namespace Timetable_Management_System
             {
                 string workingDirectory = Environment.CurrentDirectory;
                 string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
-                string completePath = projectDirectory = projectDirectory + "\\images\\lecturerDefaultImage.png";
+                string completePath = ".\\lecturerDefaultImage.png";
 
                 pictureBoxLecturer_Edit.Image = Image.FromFile(@"" + completePath);
                 pictureBoxLecturer_Edit.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -1724,7 +1724,7 @@ namespace Timetable_Management_System
                     if (!newImagePathForUpdate.Equals(""))
                     {
                         string projectPath = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10));
-                        string imageFolderPath = projectPath + "\\bin\\Debug\\images";
+                        string imageFolderPath = ".\\";
                         completeImagePath = imageFolderPath + "\\" + gblSafeFileName_Edit;
                         File.Copy(newImagePathForUpdate, Path.Combine(@"" + imageFolderPath, Path.GetFileName(newImagePathForUpdate)), true);
                         
