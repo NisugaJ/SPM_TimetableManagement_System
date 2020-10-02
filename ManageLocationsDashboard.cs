@@ -27,6 +27,14 @@ namespace Timetable_Management_System
         private DataSet suitableRoomTypeTagsDataSet = new DataSet();
         private DataTable suitableRoomTypeTagsTable = new DataTable();
 
+        private DataSet suitableRoomSubjectTagsDataSet = new DataSet();
+        private DataTable suitableRoomSubjectTagsTable = new DataTable();
+
+        private DataSet suitableRoomsForLecturersDataSet = new DataSet();
+        private DataTable suitableRoomsForLecturersTable = new DataTable();
+
+        private DataSet suitableRoomsForSessionsDataSet = new DataSet();
+        private DataTable suitableRoomsForSessionsTable = new DataTable();
         public class RoomType
         {
             public string Name { get; set; }
@@ -47,16 +55,31 @@ namespace Timetable_Management_System
             createBuildingTableIfEmpty();
             createRoomsTableIfEmpty();
             createSuitableRoomTypesForTagsTableIfEmpty();
+            createSuitableRoomSubjectsTagsTableIfEmpty();
+            createSuitableRoomsForLecturersTableIfEmpty();
+            createSuitableRoomsForSessionsTableIfEmpty();
 
             loadBuildingsData();
             loadRoomData();
-            loadBuildingsToComboBox(); 
-            loadRoomsToComboBox();
+            loadBuildingsToComboBox();
+            loadRoomTypesToComboBox();
             loadRoomTypeTagsData();
-
+            loadSuitableRoomSubjectsTagsData();
+            loadSuitableRoomsForLecturersData();
+            loadSuitableRoomsForSessiosnsData();
             // Suitable Rooms for tags
             loadTagsToCombo();
-            
+
+            //nav4
+            loadSubjectsToComboBox();
+            loadRoomsToComboBox();
+            loadSubjectsToComboBox();
+
+            //nav5
+            loadLecturersToComboBox();
+
+            //nav6
+            loadSessionsToComboBox();
         }
 
 
@@ -226,6 +249,73 @@ namespace Timetable_Management_System
                 )";
             cmd.ExecuteNonQuery();
         }
+
+        private void createSuitableRoomSubjectsTagsTableIfEmpty()
+        {
+            {
+                string cs = @"URI=file:.\" + Utils.dbName + ".db";
+
+                using var con = new SQLiteConnection(cs);
+                con.Open();
+
+                using var cmd = new SQLiteCommand(con);
+
+                cmd.CommandText = @"CREATE TABLE  IF NOT EXISTS suitable_rooms_for_subject_tags (
+                                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                subjectCode STRING,
+                                roomId INTEGER,
+                                tagId INTEGER,
+                                FOREIGN KEY(subjectCode) REFERENCES subjects(subjectCode),
+                                FOREIGN KEY(roomId) REFERENCES rooms(roomID),
+                                FOREIGN KEY(tagId) REFERENCES tags(id)
+                )";
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        private void createSuitableRoomsForLecturersTableIfEmpty()
+        {
+            {
+                string cs = @"URI=file:.\" + Utils.dbName + ".db";
+
+                using var con = new SQLiteConnection(cs);
+                con.Open();
+
+                using var cmd = new SQLiteCommand(con);
+
+                cmd.CommandText = @"CREATE TABLE  IF NOT EXISTS suitable_rooms_for_lecturers (
+                                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                lecturerId INTEGER,
+                                roomId INTEGER,
+                                FOREIGN KEY(lecturerId) REFERENCES lecturers(lecturerID),
+                                FOREIGN KEY(roomId) REFERENCES rooms(roomID)
+                )";
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        private void createSuitableRoomsForSessionsTableIfEmpty()
+        {
+            {
+                string cs = @"URI=file:.\" + Utils.dbName + ".db";
+
+                using var con = new SQLiteConnection(cs);
+                con.Open();
+
+                using var cmd = new SQLiteCommand(con);
+
+                cmd.CommandText = @"CREATE TABLE  IF NOT EXISTS suitable_rooms_for_sessions (
+                                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                sessionId INTEGER,
+                                roomId INTEGER,
+                                FOREIGN KEY(sessionId) REFERENCES session(sessionId),
+                                FOREIGN KEY(roomId) REFERENCES rooms(roomID)
+                )";
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        
         // Create SQLite DB Conn
         private void setConnection()
         {
@@ -265,7 +355,7 @@ namespace Timetable_Management_System
             setConnection();
             sql_conn.Open();
             sql_cmd = sql_conn.CreateCommand();
-            string commandText = "select * from suitable_roomtype_tags";
+            string commandText = "select srt.roomType, t.tag from suitable_roomtype_tags srt, tags t WHERE srt.tagId = t.id";
             dbAdapter = new SQLiteDataAdapter(commandText, sql_conn);
             suitableRoomTypeTagsDataSet.Reset();
             dbAdapter.Fill(suitableRoomTypeTagsDataSet);
@@ -273,6 +363,68 @@ namespace Timetable_Management_System
             suitableRoomTypeTagsGrid.DataSource = suitableRoomTypeTagsTable;
             sql_conn.Close();
         }
+
+        private void loadSuitableRoomSubjectsTagsData()
+        {
+            setConnection();
+            sql_conn.Open();
+            sql_cmd = sql_conn.CreateCommand();
+            string commandText = 
+                "select s.subjectName, r.name, t.tag " +
+                "from suitable_rooms_for_subject_tags srt, tags t, rooms r, subjects s " +
+                "WHERE srt.tagId = t.id AND r.roomID = srt.roomId AND s.subjectCode = srt.subjectCode";
+             
+            dbAdapter = new SQLiteDataAdapter(commandText, sql_conn);
+            suitableRoomSubjectTagsDataSet.Reset();
+            dbAdapter.Fill(suitableRoomSubjectTagsDataSet);
+            suitableRoomSubjectTagsTable = suitableRoomSubjectTagsDataSet.Tables[0];
+            SuitableRoomSubjectsTagsTableGrid.DataSource = suitableRoomSubjectTagsTable;
+            sql_conn.Close();
+
+            
+        }
+
+        private void loadSuitableRoomsForLecturersData()
+        {
+            setConnection();
+            sql_conn.Open();
+            sql_cmd = sql_conn.CreateCommand();
+            string commandText =
+                "select l.name, r.name AS RoomName " +
+                "from suitable_rooms_for_lecturers srl, rooms r, lecturers l " +
+                "WHERE srl.roomId = r.roomID AND l.lecturerID = srl.lecturerId ";
+
+            dbAdapter = new SQLiteDataAdapter(commandText, sql_conn);
+            suitableRoomsForLecturersDataSet.Reset();
+            dbAdapter.Fill(suitableRoomsForLecturersDataSet);
+            suitableRoomsForLecturersTable = suitableRoomsForLecturersDataSet.Tables[0];
+            suitableRoomsForLecturerTableGrid.DataSource = suitableRoomsForLecturersTable;
+            sql_conn.Close();
+
+
+        }
+
+
+        private void loadSuitableRoomsForSessiosnsData()
+        {
+            setConnection();
+            sql_conn.Open();
+            sql_cmd = sql_conn.CreateCommand();
+            string commandText =
+                "select s.sessionId AS SessionID, s.groupId AS GroupID, r.name " +
+                "from suitable_rooms_for_sessions srs, rooms r, session s " +
+                "WHERE srs.roomId = r.roomID AND srs.sessionId = s.sessionId";
+
+            dbAdapter = new SQLiteDataAdapter(commandText, sql_conn);
+            suitableRoomsForSessionsDataSet.Reset();
+            dbAdapter.Fill(suitableRoomsForSessionsDataSet);
+            suitableRoomsForSessionsTable = suitableRoomsForSessionsDataSet.Tables[0];
+            preferredRoomsForSessionsGrid.DataSource = suitableRoomsForSessionsTable;
+            sql_conn.Close();
+
+
+        }
+
         private void loadBuildingsData()
         {
             setConnection();
@@ -426,7 +578,7 @@ namespace Timetable_Management_System
             sql_conn.Close();
         }
 
-        private void loadRoomsToComboBox()
+        private void loadRoomTypesToComboBox()
         {
 
             //Build a RoomTypes list
@@ -475,6 +627,124 @@ namespace Timetable_Management_System
             comboBoxTags.DisplayMember = "tag";
             comboBoxTags.ValueMember = "id";
             comboBoxTags.DataSource = dt.Tables["Fleet"];
+
+            nav4TagsComboBox.DisplayMember = "tag";
+            nav4TagsComboBox.ValueMember = "id";
+            nav4TagsComboBox.DataSource = dt.Tables["Fleet"];
+
+            sql_conn.Close();
+        }
+
+        private void loadRoomsToComboBox()
+        {
+            setConnection();
+            sql_conn.Open();
+            sql_cmd = sql_conn.CreateCommand();
+            string commandText = "select roomID, name from rooms";
+            dbAdapter = new SQLiteDataAdapter(commandText, sql_conn);
+
+            //Fill the DataTable with records from Table.
+            DataSet dt = new DataSet();
+            dbAdapter.Fill(dt, "Fleet");
+
+            //Insert the Default Item to DataTable.
+            /*DataRow row = dt.NewRow();
+            row[0] = 0;
+            row[1] = "Please select";
+            dt.Rows.InsertAt(row, 0);
+            */
+
+            nav4RoomsComboBox.DisplayMember = "name";
+            nav4RoomsComboBox.ValueMember = "roomID";
+            nav4RoomsComboBox.DataSource = dt.Tables["Fleet"];
+
+            nav5RoomsComboBox.DisplayMember = "name";
+            nav5RoomsComboBox.ValueMember = "roomID";
+            nav5RoomsComboBox.DataSource = dt.Tables["Fleet"];
+
+
+            nav6RoomsComboBox.DisplayMember = "name";
+            nav6RoomsComboBox.ValueMember = "roomID";
+            nav6RoomsComboBox.DataSource = dt.Tables["Fleet"];
+
+            sql_conn.Close();
+        }
+
+        private void loadLecturersToComboBox()
+        {
+            setConnection();
+            sql_conn.Open();
+            sql_cmd = sql_conn.CreateCommand();
+            string commandText = "select * from lecturers";
+            dbAdapter = new SQLiteDataAdapter(commandText, sql_conn);
+
+            //Fill the DataTable with records from Table.
+            DataSet dt = new DataSet();
+            dbAdapter.Fill(dt, "Fleet");
+
+            //Insert the Default Item to DataTable.
+            /*DataRow row = dt.NewRow();
+            row[0] = 0;
+            row[1] = "Please select";
+            dt.Rows.InsertAt(row, 0);
+            */
+
+            nav5LecturersComboBox.DisplayMember = "name";
+            nav5LecturersComboBox.ValueMember = "lecturerID";
+            nav5LecturersComboBox.DataSource = dt.Tables["Fleet"];
+
+            sql_conn.Close();
+        }
+
+
+        private void loadSessionsToComboBox()
+        {
+            setConnection();
+            sql_conn.Open();
+            sql_cmd = sql_conn.CreateCommand();
+            string commandText = "select * from session";
+            dbAdapter = new SQLiteDataAdapter(commandText, sql_conn);
+
+            //Fill the DataTable with records from Table.
+            DataSet dt = new DataSet();
+            dbAdapter.Fill(dt, "Fleet");
+
+            //Insert the Default Item to DataTable.
+            /*DataRow row = dt.NewRow();
+            row[0] = 0;
+            row[1] = "Please select";
+            dt.Rows.InsertAt(row, 0);
+            */
+
+            nav6SesssionsComboBox.DisplayMember = "sessionId";
+            nav6SesssionsComboBox.ValueMember = "sessionId";
+            nav6SesssionsComboBox.DataSource = dt.Tables["Fleet"];
+
+            sql_conn.Close();
+        }
+
+        private void loadSubjectsToComboBox()
+        {
+            setConnection();
+            sql_conn.Open();
+            sql_cmd = sql_conn.CreateCommand();
+            string commandText = "select subjectCode, subjectName from subjects";
+            dbAdapter = new SQLiteDataAdapter(commandText, sql_conn);
+
+            //Fill the DataTable with records from Table.
+            DataSet dt = new DataSet();
+            dbAdapter.Fill(dt, "Fleet");
+
+            //Insert the Default Item to DataTable.
+            /*DataRow row = dt.NewRow();
+            row[0] = 0;
+            row[1] = "Please select";
+            dt.Rows.InsertAt(row, 0);
+            */
+
+            nav4SubjectsComboBox.DisplayMember = "subjectName";
+            nav4SubjectsComboBox.ValueMember = "subjectCode";
+            nav4SubjectsComboBox.DataSource = dt.Tables["Fleet"];
 
             sql_conn.Close();
         }
@@ -545,9 +815,89 @@ namespace Timetable_Management_System
             if(true)
             {
                 // Insert Room
-                string insertQ = "insert into suitable_roomtype_tags (roomType, tagId ) VALUES('" + nav3comboRoomTypes.SelectedText + "', '" + comboBoxTags.SelectedValue + "')";
+                string insertQ = "insert into suitable_roomtype_tags (roomType, tagId ) VALUES('" + nav3comboRoomTypes.Text + "', '" + comboBoxTags.SelectedValue + "')";
                 executeQuery(insertQ);
                 loadRoomTypeTagsData();
+            }
+            else
+            {
+                MessageBox.Show(" Form has some errors !");
+            }
+        }
+
+        private void lblPrefferedRoomForASubject_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PrefferedRoomForASubject_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click_2(object sender, EventArgs e)
+        {
+            if (true)
+            {
+                // Insert Room
+                string insertQ = "insert into suitable_rooms_for_subject_tags (subjectCode, roomId, tagId   ) VALUES('" + nav4SubjectsComboBox.SelectedValue + "','"+nav4RoomsComboBox.SelectedValue+"', '" + nav4TagsComboBox.SelectedValue + "')";
+                executeQuery(insertQ);
+                loadSuitableRoomSubjectsTagsData();
+            }
+            else
+            {
+                MessageBox.Show(" Form has some errors !");
+            }
+        }
+
+        private void dataGridView1_CellContentClick_2(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            if (true)
+            {
+                // Insert Room
+                string insertQ = "insert into suitable_rooms_for_lecturers (lecturerId, roomId   ) VALUES('" + nav5LecturersComboBox.SelectedValue + "','" + nav5RoomsComboBox.SelectedValue +  "')";
+                executeQuery(insertQ);
+                loadSuitableRoomsForLecturersData();
+            }
+            else
+            {
+                MessageBox.Show(" Form has some errors !");
+            }
+        }
+
+        private void PrefferedRoomForALecturer_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PrefferedRoomForASession_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (true)
+            {
+                // Insert Room
+                string insertQ = "insert into suitable_rooms_for_sessions (sessionId, roomId   ) VALUES('" + nav6SesssionsComboBox.SelectedValue + "','" + nav6RoomsComboBox.SelectedValue + "')";
+                executeQuery(insertQ);
+                loadSuitableRoomsForSessiosnsData();
             }
             else
             {

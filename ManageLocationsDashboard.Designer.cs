@@ -70,12 +70,22 @@
             this.roomsGrid = new System.Windows.Forms.DataGridView();
             this.lblRooms = new System.Windows.Forms.Label();
             this.RoomsForTags = new System.Windows.Forms.TabPage();
+            this.suitableRoomTypeTagsGrid = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             this.nav3comboRoomTypes = new System.Windows.Forms.ComboBox();
             this.comboBoxTags = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.lblRoomsForTags = new System.Windows.Forms.Label();
             this.PrefferedRoomForASubject = new System.Windows.Forms.TabPage();
+            this.nav4RoomsComboBox = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.SuitableRoomSubjectsTagsTableGrid = new System.Windows.Forms.DataGridView();
+            this.button2 = new System.Windows.Forms.Button();
+            this.nav4SubjectsComboBox = new System.Windows.Forms.ComboBox();
+            this.nav4TagsComboBox = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.lblPrefferedRoomForASubject = new System.Windows.Forms.Label();
             this.PrefferedRoomForALecturer = new System.Windows.Forms.TabPage();
             this.lblPrefferedRoomForALecturer = new System.Windows.Forms.Label();
@@ -100,8 +110,19 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            this.button1 = new System.Windows.Forms.Button();
-            this.suitableRoomTypeTagsGrid = new System.Windows.Forms.DataGridView();
+            this.suitableRoomsForLecturerTableGrid = new System.Windows.Forms.DataGridView();
+            this.button3 = new System.Windows.Forms.Button();
+            this.nav5RoomsComboBox = new System.Windows.Forms.ComboBox();
+            this.nav5LecturersComboBox = new System.Windows.Forms.ComboBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.preferredRoomsForSessionsGrid = new System.Windows.Forms.DataGridView();
+            this.button4 = new System.Windows.Forms.Button();
+            this.nav6RoomsComboBox = new System.Windows.Forms.ComboBox();
+            this.nav6SesssionsComboBox = new System.Windows.Forms.ComboBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.Buildings.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -112,7 +133,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.editRoomCapacityVal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.roomsGrid)).BeginInit();
             this.RoomsForTags.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.suitableRoomTypeTagsGrid)).BeginInit();
             this.PrefferedRoomForASubject.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SuitableRoomSubjectsTagsTableGrid)).BeginInit();
             this.PrefferedRoomForALecturer.SuspendLayout();
             this.PrefferedRoomForASession.SuspendLayout();
             this.ConsecutiveSessions.SuspendLayout();
@@ -128,7 +151,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgTime)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.suitableRoomTypeTagsGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.suitableRoomsForLecturerTableGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.preferredRoomsForSessionsGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -565,6 +589,27 @@
             this.RoomsForTags.UseVisualStyleBackColor = true;
             this.RoomsForTags.Click += new System.EventHandler(this.RoomsForTags_Click);
             // 
+            // suitableRoomTypeTagsGrid
+            // 
+            this.suitableRoomTypeTagsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.suitableRoomTypeTagsGrid.Location = new System.Drawing.Point(509, 55);
+            this.suitableRoomTypeTagsGrid.Name = "suitableRoomTypeTagsGrid";
+            this.suitableRoomTypeTagsGrid.RowHeadersWidth = 51;
+            this.suitableRoomTypeTagsGrid.RowTemplate.Height = 24;
+            this.suitableRoomTypeTagsGrid.Size = new System.Drawing.Size(784, 217);
+            this.suitableRoomTypeTagsGrid.TabIndex = 18;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Coral;
+            this.button1.Location = new System.Drawing.Point(335, 204);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(150, 33);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "Add";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // nav3comboRoomTypes
             // 
             this.nav3comboRoomTypes.FormattingEnabled = true;
@@ -612,6 +657,14 @@
             // 
             // PrefferedRoomForASubject
             // 
+            this.PrefferedRoomForASubject.Controls.Add(this.nav4RoomsComboBox);
+            this.PrefferedRoomForASubject.Controls.Add(this.label17);
+            this.PrefferedRoomForASubject.Controls.Add(this.SuitableRoomSubjectsTagsTableGrid);
+            this.PrefferedRoomForASubject.Controls.Add(this.button2);
+            this.PrefferedRoomForASubject.Controls.Add(this.nav4SubjectsComboBox);
+            this.PrefferedRoomForASubject.Controls.Add(this.nav4TagsComboBox);
+            this.PrefferedRoomForASubject.Controls.Add(this.label15);
+            this.PrefferedRoomForASubject.Controls.Add(this.label16);
             this.PrefferedRoomForASubject.Controls.Add(this.lblPrefferedRoomForASubject);
             this.PrefferedRoomForASubject.Location = new System.Drawing.Point(224, 4);
             this.PrefferedRoomForASubject.Name = "PrefferedRoomForASubject";
@@ -619,18 +672,100 @@
             this.PrefferedRoomForASubject.TabIndex = 3;
             this.PrefferedRoomForASubject.Text = "Preffered room for a subject";
             this.PrefferedRoomForASubject.UseVisualStyleBackColor = true;
+            this.PrefferedRoomForASubject.Click += new System.EventHandler(this.PrefferedRoomForASubject_Click);
+            // 
+            // nav4RoomsComboBox
+            // 
+            this.nav4RoomsComboBox.FormattingEnabled = true;
+            this.nav4RoomsComboBox.Location = new System.Drawing.Point(259, 211);
+            this.nav4RoomsComboBox.Name = "nav4RoomsComboBox";
+            this.nav4RoomsComboBox.Size = new System.Drawing.Size(150, 28);
+            this.nav4RoomsComboBox.TabIndex = 26;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(33, 216);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(89, 20);
+            this.label17.TabIndex = 25;
+            this.label17.Text = "Select room";
+            // 
+            // SuitableRoomSubjectsTagsTableGrid
+            // 
+            this.SuitableRoomSubjectsTagsTableGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.SuitableRoomSubjectsTagsTableGrid.Location = new System.Drawing.Point(494, 90);
+            this.SuitableRoomSubjectsTagsTableGrid.Name = "SuitableRoomSubjectsTagsTableGrid";
+            this.SuitableRoomSubjectsTagsTableGrid.RowHeadersWidth = 51;
+            this.SuitableRoomSubjectsTagsTableGrid.RowTemplate.Height = 24;
+            this.SuitableRoomSubjectsTagsTableGrid.Size = new System.Drawing.Size(784, 217);
+            this.SuitableRoomSubjectsTagsTableGrid.TabIndex = 24;
+            this.SuitableRoomSubjectsTagsTableGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_2);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Coral;
+            this.button2.Location = new System.Drawing.Point(259, 277);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(150, 33);
+            this.button2.TabIndex = 23;
+            this.button2.Text = "Add";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click_2);
+            // 
+            // nav4SubjectsComboBox
+            // 
+            this.nav4SubjectsComboBox.FormattingEnabled = true;
+            this.nav4SubjectsComboBox.Location = new System.Drawing.Point(259, 93);
+            this.nav4SubjectsComboBox.Name = "nav4SubjectsComboBox";
+            this.nav4SubjectsComboBox.Size = new System.Drawing.Size(150, 28);
+            this.nav4SubjectsComboBox.TabIndex = 22;
+            // 
+            // nav4TagsComboBox
+            // 
+            this.nav4TagsComboBox.FormattingEnabled = true;
+            this.nav4TagsComboBox.Location = new System.Drawing.Point(259, 148);
+            this.nav4TagsComboBox.Name = "nav4TagsComboBox";
+            this.nav4TagsComboBox.Size = new System.Drawing.Size(150, 28);
+            this.nav4TagsComboBox.TabIndex = 21;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(33, 93);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(100, 20);
+            this.label15.TabIndex = 20;
+            this.label15.Text = "Select subject";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(33, 153);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(75, 20);
+            this.label16.TabIndex = 19;
+            this.label16.Text = "Select tag";
             // 
             // lblPrefferedRoomForASubject
             // 
             this.lblPrefferedRoomForASubject.AutoSize = true;
-            this.lblPrefferedRoomForASubject.Location = new System.Drawing.Point(298, 46);
+            this.lblPrefferedRoomForASubject.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrefferedRoomForASubject.Location = new System.Drawing.Point(17, 14);
             this.lblPrefferedRoomForASubject.Name = "lblPrefferedRoomForASubject";
-            this.lblPrefferedRoomForASubject.Size = new System.Drawing.Size(204, 20);
+            this.lblPrefferedRoomForASubject.Size = new System.Drawing.Size(271, 28);
             this.lblPrefferedRoomForASubject.TabIndex = 0;
-            this.lblPrefferedRoomForASubject.Text = "Preffered Room For a Subject";
+            this.lblPrefferedRoomForASubject.Text = "Preffered Rooms for a Subject";
+            this.lblPrefferedRoomForASubject.Click += new System.EventHandler(this.lblPrefferedRoomForASubject_Click);
             // 
             // PrefferedRoomForALecturer
             // 
+            this.PrefferedRoomForALecturer.Controls.Add(this.suitableRoomsForLecturerTableGrid);
+            this.PrefferedRoomForALecturer.Controls.Add(this.button3);
+            this.PrefferedRoomForALecturer.Controls.Add(this.nav5RoomsComboBox);
+            this.PrefferedRoomForALecturer.Controls.Add(this.nav5LecturersComboBox);
+            this.PrefferedRoomForALecturer.Controls.Add(this.label18);
+            this.PrefferedRoomForALecturer.Controls.Add(this.label19);
             this.PrefferedRoomForALecturer.Controls.Add(this.lblPrefferedRoomForALecturer);
             this.PrefferedRoomForALecturer.Location = new System.Drawing.Point(224, 4);
             this.PrefferedRoomForALecturer.Name = "PrefferedRoomForALecturer";
@@ -638,18 +773,27 @@
             this.PrefferedRoomForALecturer.TabIndex = 4;
             this.PrefferedRoomForALecturer.Text = "Preffered room for a lecturer";
             this.PrefferedRoomForALecturer.UseVisualStyleBackColor = true;
+            this.PrefferedRoomForALecturer.Click += new System.EventHandler(this.PrefferedRoomForALecturer_Click);
             // 
             // lblPrefferedRoomForALecturer
             // 
             this.lblPrefferedRoomForALecturer.AutoSize = true;
-            this.lblPrefferedRoomForALecturer.Location = new System.Drawing.Point(246, 60);
+            this.lblPrefferedRoomForALecturer.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrefferedRoomForALecturer.Location = new System.Drawing.Point(25, 19);
             this.lblPrefferedRoomForALecturer.Name = "lblPrefferedRoomForALecturer";
-            this.lblPrefferedRoomForALecturer.Size = new System.Drawing.Size(208, 20);
+            this.lblPrefferedRoomForALecturer.Size = new System.Drawing.Size(403, 38);
             this.lblPrefferedRoomForALecturer.TabIndex = 0;
-            this.lblPrefferedRoomForALecturer.Text = "Preffered Room For a Lecturer";
+            this.lblPrefferedRoomForALecturer.Text = "Preffered Rooms For a Lecturer";
             // 
             // PrefferedRoomForASession
             // 
+            this.PrefferedRoomForASession.Controls.Add(this.preferredRoomsForSessionsGrid);
+            this.PrefferedRoomForASession.Controls.Add(this.button4);
+            this.PrefferedRoomForASession.Controls.Add(this.nav6RoomsComboBox);
+            this.PrefferedRoomForASession.Controls.Add(this.nav6SesssionsComboBox);
+            this.PrefferedRoomForASession.Controls.Add(this.label20);
+            this.PrefferedRoomForASession.Controls.Add(this.label21);
+            this.PrefferedRoomForASession.Controls.Add(this.label22);
             this.PrefferedRoomForASession.Controls.Add(this.lblPrefferedRoomForASession);
             this.PrefferedRoomForASession.Location = new System.Drawing.Point(224, 4);
             this.PrefferedRoomForASession.Name = "PrefferedRoomForASession";
@@ -657,15 +801,15 @@
             this.PrefferedRoomForASession.TabIndex = 5;
             this.PrefferedRoomForASession.Text = "Preffered room for a session";
             this.PrefferedRoomForASession.UseVisualStyleBackColor = true;
+            this.PrefferedRoomForASession.Click += new System.EventHandler(this.PrefferedRoomForASession_Click);
             // 
             // lblPrefferedRoomForASession
             // 
             this.lblPrefferedRoomForASession.AutoSize = true;
             this.lblPrefferedRoomForASession.Location = new System.Drawing.Point(283, 67);
             this.lblPrefferedRoomForASession.Name = "lblPrefferedRoomForASession";
-            this.lblPrefferedRoomForASession.Size = new System.Drawing.Size(204, 20);
+            this.lblPrefferedRoomForASession.Size = new System.Drawing.Size(0, 20);
             this.lblPrefferedRoomForASession.TabIndex = 0;
-            this.lblPrefferedRoomForASession.Text = "Preffered Room For a Session";
             // 
             // ConsecutiveSessions
             // 
@@ -852,26 +996,127 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // button1
+            // suitableRoomsForLecturerTableGrid
             // 
-            this.button1.BackColor = System.Drawing.Color.Coral;
-            this.button1.Location = new System.Drawing.Point(335, 204);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 33);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.suitableRoomsForLecturerTableGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.suitableRoomsForLecturerTableGrid.Location = new System.Drawing.Point(527, 89);
+            this.suitableRoomsForLecturerTableGrid.Name = "suitableRoomsForLecturerTableGrid";
+            this.suitableRoomsForLecturerTableGrid.RowHeadersWidth = 51;
+            this.suitableRoomsForLecturerTableGrid.RowTemplate.Height = 24;
+            this.suitableRoomsForLecturerTableGrid.Size = new System.Drawing.Size(784, 217);
+            this.suitableRoomsForLecturerTableGrid.TabIndex = 24;
             // 
-            // suitableRoomTypeTagsGrid
+            // button3
             // 
-            this.suitableRoomTypeTagsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.suitableRoomTypeTagsGrid.Location = new System.Drawing.Point(509, 55);
-            this.suitableRoomTypeTagsGrid.Name = "suitableRoomTypeTagsGrid";
-            this.suitableRoomTypeTagsGrid.RowHeadersWidth = 51;
-            this.suitableRoomTypeTagsGrid.RowTemplate.Height = 24;
-            this.suitableRoomTypeTagsGrid.Size = new System.Drawing.Size(784, 217);
-            this.suitableRoomTypeTagsGrid.TabIndex = 18;
+            this.button3.BackColor = System.Drawing.Color.Coral;
+            this.button3.Location = new System.Drawing.Point(300, 238);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(150, 33);
+            this.button3.TabIndex = 23;
+            this.button3.Text = "Add";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            // 
+            // nav5RoomsComboBox
+            // 
+            this.nav5RoomsComboBox.FormattingEnabled = true;
+            this.nav5RoomsComboBox.Location = new System.Drawing.Point(300, 175);
+            this.nav5RoomsComboBox.Name = "nav5RoomsComboBox";
+            this.nav5RoomsComboBox.Size = new System.Drawing.Size(150, 28);
+            this.nav5RoomsComboBox.TabIndex = 22;
+            this.nav5RoomsComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // nav5LecturersComboBox
+            // 
+            this.nav5LecturersComboBox.FormattingEnabled = true;
+            this.nav5LecturersComboBox.Location = new System.Drawing.Point(300, 111);
+            this.nav5LecturersComboBox.Name = "nav5LecturersComboBox";
+            this.nav5LecturersComboBox.Size = new System.Drawing.Size(150, 28);
+            this.nav5LecturersComboBox.TabIndex = 21;
+            this.nav5LecturersComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(66, 178);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(89, 20);
+            this.label18.TabIndex = 20;
+            this.label18.Text = "Select room";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(66, 111);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(103, 20);
+            this.label19.TabIndex = 19;
+            this.label19.Text = "Select lecturer";
+            // 
+            // preferredRoomsForSessionsGrid
+            // 
+            this.preferredRoomsForSessionsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.preferredRoomsForSessionsGrid.Location = new System.Drawing.Point(526, 98);
+            this.preferredRoomsForSessionsGrid.Name = "preferredRoomsForSessionsGrid";
+            this.preferredRoomsForSessionsGrid.RowHeadersWidth = 51;
+            this.preferredRoomsForSessionsGrid.RowTemplate.Height = 24;
+            this.preferredRoomsForSessionsGrid.Size = new System.Drawing.Size(784, 217);
+            this.preferredRoomsForSessionsGrid.TabIndex = 31;
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.Color.Coral;
+            this.button4.Location = new System.Drawing.Point(299, 247);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(150, 33);
+            this.button4.TabIndex = 30;
+            this.button4.Text = "Add";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // nav6RoomsComboBox
+            // 
+            this.nav6RoomsComboBox.FormattingEnabled = true;
+            this.nav6RoomsComboBox.Location = new System.Drawing.Point(299, 184);
+            this.nav6RoomsComboBox.Name = "nav6RoomsComboBox";
+            this.nav6RoomsComboBox.Size = new System.Drawing.Size(150, 28);
+            this.nav6RoomsComboBox.TabIndex = 29;
+            // 
+            // nav6SesssionsComboBox
+            // 
+            this.nav6SesssionsComboBox.FormattingEnabled = true;
+            this.nav6SesssionsComboBox.Location = new System.Drawing.Point(299, 120);
+            this.nav6SesssionsComboBox.Name = "nav6SesssionsComboBox";
+            this.nav6SesssionsComboBox.Size = new System.Drawing.Size(150, 28);
+            this.nav6SesssionsComboBox.TabIndex = 28;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(65, 187);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(89, 20);
+            this.label20.TabIndex = 27;
+            this.label20.Text = "Select room";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(65, 120);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(100, 20);
+            this.label21.TabIndex = 26;
+            this.label21.Text = "Select session";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(24, 28);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(383, 38);
+            this.label22.TabIndex = 25;
+            this.label22.Text = "Preffered Room For a Session";
             // 
             // ManageLocationsDashboard
             // 
@@ -910,8 +1155,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.roomsGrid)).EndInit();
             this.RoomsForTags.ResumeLayout(false);
             this.RoomsForTags.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.suitableRoomTypeTagsGrid)).EndInit();
             this.PrefferedRoomForASubject.ResumeLayout(false);
             this.PrefferedRoomForASubject.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SuitableRoomSubjectsTagsTableGrid)).EndInit();
             this.PrefferedRoomForALecturer.ResumeLayout(false);
             this.PrefferedRoomForALecturer.PerformLayout();
             this.PrefferedRoomForASession.ResumeLayout(false);
@@ -931,7 +1178,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgTime)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.suitableRoomTypeTagsGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.suitableRoomsForLecturerTableGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.preferredRoomsForSessionsGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1011,5 +1259,26 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
         private System.Windows.Forms.DataGridView suitableRoomTypeTagsGrid;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox nav4RoomsComboBox;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.DataGridView SuitableRoomSubjectsTagsTableGrid;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ComboBox nav4SubjectsComboBox;
+        private System.Windows.Forms.ComboBox nav4TagsComboBox;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.DataGridView suitableRoomsForLecturerTableGrid;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ComboBox nav5RoomsComboBox;
+        private System.Windows.Forms.ComboBox nav5LecturersComboBox;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.DataGridView preferredRoomsForSessionsGrid;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ComboBox nav6RoomsComboBox;
+        private System.Windows.Forms.ComboBox nav6SesssionsComboBox;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
     }
 }
