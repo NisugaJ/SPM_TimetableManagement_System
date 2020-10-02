@@ -5,6 +5,12 @@ VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timetable_Management_System", "Timetable_Management_System.csproj", "{CD827802-3116-46DB-8D9B-5C3A3E9DF190}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TimetableManagementSystem", "..\TimetableManagementSystem\TimetableManagementSystem.vdproj", "{9D725493-E03F-4126-AA79-664DBFD4A218}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup1", "..\jj\Setup1\Setup1.vdproj", "{356DAA63-D17F-4E8B-86E8-256FB93268D8}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TimeTableManagement-11", "..\TimeTableManagement-11\TimeTableManagement-11.vdproj", "{677B2316-B82A-4F59-BA06-F9F1857C1D44}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,12 @@ Global
 		{CD827802-3116-46DB-8D9B-5C3A3E9DF190}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD827802-3116-46DB-8D9B-5C3A3E9DF190}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD827802-3116-46DB-8D9B-5C3A3E9DF190}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D725493-E03F-4126-AA79-664DBFD4A218}.Debug|Any CPU.ActiveCfg = Debug
+		{9D725493-E03F-4126-AA79-664DBFD4A218}.Release|Any CPU.ActiveCfg = Release
+		{356DAA63-D17F-4E8B-86E8-256FB93268D8}.Debug|Any CPU.ActiveCfg = Debug
+		{356DAA63-D17F-4E8B-86E8-256FB93268D8}.Release|Any CPU.ActiveCfg = Release
+		{677B2316-B82A-4F59-BA06-F9F1857C1D44}.Debug|Any CPU.ActiveCfg = Debug
+		{677B2316-B82A-4F59-BA06-F9F1857C1D44}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2675,7 +2675,8 @@ namespace Timetable_Management_System
                 comboBox5.Text = dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
                 comboBox4.Text = dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
             }
-            catch (Exception ex)
+            catch (Exception 
+            ex)
             {
                 MessageBox.Show("Please select the corner");
             }
