@@ -50,12 +50,17 @@ namespace Timetable_Management_System
 
             loadBuildingsData();
             loadRoomData();
-            loadBuildingsToComboBox(); 
-            loadRoomsToComboBox();
+            loadBuildingsToComboBox();
+            loadRoomTypesToComboBox();
             loadRoomTypeTagsData();
 
             // Suitable Rooms for tags
             loadTagsToCombo();
+
+            //nav4
+            loadSubjectsToComboBox();
+            loadRoomsToComboBox();
+            loadSubjectsToComboBox();
             
         }
 
@@ -265,7 +270,7 @@ namespace Timetable_Management_System
             setConnection();
             sql_conn.Open();
             sql_cmd = sql_conn.CreateCommand();
-            string commandText = "select * from suitable_roomtype_tags";
+            string commandText = "select srt.roomType, t.tag from suitable_roomtype_tags srt, tags t WHERE srt.tagId = t.id";
             dbAdapter = new SQLiteDataAdapter(commandText, sql_conn);
             suitableRoomTypeTagsDataSet.Reset();
             dbAdapter.Fill(suitableRoomTypeTagsDataSet);
@@ -426,7 +431,7 @@ namespace Timetable_Management_System
             sql_conn.Close();
         }
 
-        private void loadRoomsToComboBox()
+        private void loadRoomTypesToComboBox()
         {
 
             //Build a RoomTypes list
@@ -475,6 +480,62 @@ namespace Timetable_Management_System
             comboBoxTags.DisplayMember = "tag";
             comboBoxTags.ValueMember = "id";
             comboBoxTags.DataSource = dt.Tables["Fleet"];
+
+            nav4TagsComboBox.DisplayMember = "tag";
+            nav4TagsComboBox.ValueMember = "id";
+            nav4TagsComboBox.DataSource = dt.Tables["Fleet"];
+
+            sql_conn.Close();
+        }
+
+        private void loadRoomsToComboBox()
+        {
+            setConnection();
+            sql_conn.Open();
+            sql_cmd = sql_conn.CreateCommand();
+            string commandText = "select roomID, name from rooms";
+            dbAdapter = new SQLiteDataAdapter(commandText, sql_conn);
+
+            //Fill the DataTable with records from Table.
+            DataSet dt = new DataSet();
+            dbAdapter.Fill(dt, "Fleet");
+
+            //Insert the Default Item to DataTable.
+            /*DataRow row = dt.NewRow();
+            row[0] = 0;
+            row[1] = "Please select";
+            dt.Rows.InsertAt(row, 0);
+            */
+
+            nav4RoomsComboBox.DisplayMember = "name";
+            nav4RoomsComboBox.ValueMember = "roomID";
+            nav4RoomsComboBox.DataSource = dt.Tables["Fleet"];
+
+            sql_conn.Close();
+        }
+
+        private void loadSubjectsToComboBox()
+        {
+            setConnection();
+            sql_conn.Open();
+            sql_cmd = sql_conn.CreateCommand();
+            string commandText = "select subjectCode, subjectName from subjects";
+            dbAdapter = new SQLiteDataAdapter(commandText, sql_conn);
+
+            //Fill the DataTable with records from Table.
+            DataSet dt = new DataSet();
+            dbAdapter.Fill(dt, "Fleet");
+
+            //Insert the Default Item to DataTable.
+            /*DataRow row = dt.NewRow();
+            row[0] = 0;
+            row[1] = "Please select";
+            dt.Rows.InsertAt(row, 0);
+            */
+
+            nav4SubjectsComboBox.DisplayMember = "subjectName";
+            nav4SubjectsComboBox.ValueMember = "subjectCode";
+            nav4SubjectsComboBox.DataSource = dt.Tables["Fleet"];
 
             sql_conn.Close();
         }
@@ -545,7 +606,7 @@ namespace Timetable_Management_System
             if(true)
             {
                 // Insert Room
-                string insertQ = "insert into suitable_roomtype_tags (roomType, tagId ) VALUES('" + nav3comboRoomTypes.SelectedText + "', '" + comboBoxTags.SelectedValue + "')";
+                string insertQ = "insert into suitable_roomtype_tags (roomType, tagId ) VALUES('" + nav3comboRoomTypes.Text + "', '" + comboBoxTags.SelectedValue + "')";
                 executeQuery(insertQ);
                 loadRoomTypeTagsData();
             }
@@ -553,6 +614,16 @@ namespace Timetable_Management_System
             {
                 MessageBox.Show(" Form has some errors !");
             }
+        }
+
+        private void lblPrefferedRoomForASubject_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PrefferedRoomForASubject_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
