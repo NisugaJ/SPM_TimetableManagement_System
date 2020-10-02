@@ -204,17 +204,71 @@ VALUES	('Malabe','Faculty of Computing','SE Department'),
 			cmd2.ExecuteNonQuery();
 
 
+			//ravindu insert
+			using var cmd3 = new SQLiteCommand(con);
+
+			cmd3.CommandText = @"
+	CREATE TABLE  IF NOT EXISTS Days(
+								dayID INTEGER PRIMARY KEY,
+								day TEXT
+				)
+";
+
+			cmd3.ExecuteNonQuery();
+
+			using var cmd4 = new SQLiteCommand(con);
+
+			cmd4.CommandText = @"
+
+INSERT OR IGNORE INTO Days
+VALUES ('1','Monday'),('2','Tuesday'),('3','Wednesday'),('4','Thursday'),
+		('5','Froday'),('6','Saturday'),('7','Sunday');
+";
+
+			cmd4.ExecuteNonQuery();
 
 
 
+			cmd3.CommandText = @"
+				CREATE TABLE  IF NOT EXISTS testSessions(
+								testID INTEGER PRIMARY KEY,
+								sessionId INTEGER,
+								lecID INTEGER,
+								groupName TEXT,
+								groupId INTEGER,
+								roomName TEXT
+				)";
 
-		
+			cmd3.ExecuteNonQuery();
+
+			cmd3.CommandText = @"
+				CREATE TABLE  IF NOT EXISTS testLec(
+								lecId INTEGER PRIMARY KEY ,
+								lecName TEXT,
+								lecNo INTEGER
+				)";
+
+			cmd3.ExecuteNonQuery();
 
 
+			cmd4.CommandText = @"
+
+			INSERT OR IGNORE INTO testSessions(testID,sessionId,lecID,groupName,groupId,roomName) VALUES (1,5,6,'Group1',1,'A502'),(2,10,6,'Group3',3,'A506'),
+			(3,7,6,'Group3',3,'A502'),(4,9,3,'Group2',2,'S111')
+			,(5,15, 3, 'Group1', 1, 'S111'),(6,16, 13, 'Group4', 4, 'S112'),(7,32, 22, 'Group4', 4, 'A506'),(8,25, 22, 'Group2', 2, 'S112');
+";
+
+			cmd4.ExecuteNonQuery();
+
+			cmd4.CommandText = @"
+
+			INSERT OR IGNORE INTO testLec(lecId,lecName,lecNo) VALUES(1,'rav',6),(2,'amanda',3),(3,'mithabani',13),(4,'chamod',22);
+";
+
+			cmd4.ExecuteNonQuery();
 
 			con.Close();
-           
 
-        }
+		}
     }
 }
