@@ -50,6 +50,8 @@
             this.lblManageSubjects_Add = new System.Windows.Forms.Label();
             this.lblAddSubjects_Add = new System.Windows.Forms.Label();
             this.EditSubject = new System.Windows.Forms.TabPage();
+            this.cmbProgram_Edit = new System.Windows.Forms.ComboBox();
+            this.lblProgram_Edit = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.btnResetSubject_Edit = new System.Windows.Forms.Button();
@@ -152,8 +154,6 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.imgTime = new System.Windows.Forms.PictureBox();
-            this.cmbProgram_Edit = new System.Windows.Forms.ComboBox();
-            this.lblProgram_Edit = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.AddSubject.SuspendLayout();
@@ -228,6 +228,7 @@
             this.AddSubject.TabIndex = 0;
             this.AddSubject.Text = "Add Subject";
             this.AddSubject.UseVisualStyleBackColor = true;
+            this.AddSubject.Click += new System.EventHandler(this.AddSubject_Click);
             // 
             // cmbProgram_Add
             // 
@@ -418,6 +419,23 @@
             this.EditSubject.TabIndex = 1;
             this.EditSubject.Text = "Edit Subject";
             this.EditSubject.UseVisualStyleBackColor = true;
+            // 
+            // cmbProgram_Edit
+            // 
+            this.cmbProgram_Edit.FormattingEnabled = true;
+            this.cmbProgram_Edit.Location = new System.Drawing.Point(621, 388);
+            this.cmbProgram_Edit.Name = "cmbProgram_Edit";
+            this.cmbProgram_Edit.Size = new System.Drawing.Size(297, 28);
+            this.cmbProgram_Edit.TabIndex = 58;
+            // 
+            // lblProgram_Edit
+            // 
+            this.lblProgram_Edit.AutoSize = true;
+            this.lblProgram_Edit.Location = new System.Drawing.Point(497, 392);
+            this.lblProgram_Edit.Name = "lblProgram_Edit";
+            this.lblProgram_Edit.Size = new System.Drawing.Size(66, 20);
+            this.lblProgram_Edit.TabIndex = 57;
+            this.lblProgram_Edit.Text = "Program";
             // 
             // label3
             // 
@@ -1480,23 +1498,6 @@
             this.imgTime.TabIndex = 45;
             this.imgTime.TabStop = false;
             this.imgTime.Click += new System.EventHandler(this.imgTime_Click);
-            // 
-            // cmbProgram_Edit
-            // 
-            this.cmbProgram_Edit.FormattingEnabled = true;
-            this.cmbProgram_Edit.Location = new System.Drawing.Point(621, 388);
-            this.cmbProgram_Edit.Name = "cmbProgram_Edit";
-            this.cmbProgram_Edit.Size = new System.Drawing.Size(297, 28);
-            this.cmbProgram_Edit.TabIndex = 58;
-            // 
-            // lblProgram_Edit
-            // 
-            this.lblProgram_Edit.AutoSize = true;
-            this.lblProgram_Edit.Location = new System.Drawing.Point(497, 392);
-            this.lblProgram_Edit.Name = "lblProgram_Edit";
-            this.lblProgram_Edit.Size = new System.Drawing.Size(66, 20);
-            this.lblProgram_Edit.TabIndex = 57;
-            this.lblProgram_Edit.Text = "Program";
             // 
             // label12
             // 
