@@ -993,7 +993,7 @@
             this.manageSessionGridView.AllowUserToAddRows = false;
             this.manageSessionGridView.AllowUserToDeleteRows = false;
             this.manageSessionGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.manageSessionGridView.Location = new System.Drawing.Point(143, 273);
+            this.manageSessionGridView.Location = new System.Drawing.Point(157, 275);
             this.manageSessionGridView.Name = "manageSessionGridView";
             this.manageSessionGridView.RowHeadersWidth = 51;
             this.manageSessionGridView.RowTemplate.Height = 24;

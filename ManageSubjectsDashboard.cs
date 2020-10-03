@@ -1942,5 +1942,13 @@ namespace Timetable_Management_System
             Login obj = new Login();
             obj.Show();
         }
+
+        private void AddSubject_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Login obj = new Login();
+            obj.Show();
+        }
+        
     }
 }

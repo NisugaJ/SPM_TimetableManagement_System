@@ -35,6 +35,12 @@ namespace Timetable_Management_System
 
         private DataSet suitableRoomsForSessionsDataSet = new DataSet();
         private DataTable suitableRoomsForSessionsTable = new DataTable();
+
+        private DataSet suitableRoomTypesFoeConsecutiveSessionsDataSet = new DataSet();
+        private DataTable suitableRoomTypesFoeConsecutiveSessionsTable = new DataTable();
+
+        private DataSet suitableRoomUnavailbleSlotsDataSet = new DataSet();
+        private DataTable suitableRoomUnavailbleSlotsTable = new DataTable();
         public class RoomType
         {
             public string Name { get; set; }
@@ -58,6 +64,8 @@ namespace Timetable_Management_System
             createSuitableRoomSubjectsTagsTableIfEmpty();
             createSuitableRoomsForLecturersTableIfEmpty();
             createSuitableRoomsForSessionsTableIfEmpty();
+            createSuitableRoomsForConsecutiveSessionsTableIfEmpty();
+            createUnavailableTimeSlotsOfRoomsTableIfEmpty();
 
             loadBuildingsData();
             loadRoomData();
@@ -67,6 +75,8 @@ namespace Timetable_Management_System
             loadSuitableRoomSubjectsTagsData();
             loadSuitableRoomsForLecturersData();
             loadSuitableRoomsForSessiosnsData();
+            loadRoomUnavailableSlotsData();
+
             // Suitable Rooms for tags
             loadTagsToCombo();
 
@@ -80,6 +90,14 @@ namespace Timetable_Management_System
 
             //nav6
             loadSessionsToComboBox();
+
+            //nav7
+            loadRoomTypesForConsecutiveSessiosnsData();
+
+
+            //nav8
+            loadTimeSlotsToComboBox();
+            loadDaysToComboBox();
         }
 
 
@@ -315,7 +333,52 @@ namespace Timetable_Management_System
             }
         }
 
-        
+        private void createSuitableRoomsForConsecutiveSessionsTableIfEmpty()
+        {
+            {
+                string cs = @"URI=file:.\" + Utils.dbName + ".db";
+
+                using var con = new SQLiteConnection(cs);
+                con.Open();
+
+                using var cmd = new SQLiteCommand(con);
+
+                cmd.CommandText = @"CREATE TABLE  IF NOT EXISTS room_types_for_consecutive_sessions (
+                                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                tag1Id INTEGER,
+                                tag2Id INTEGER,
+                                roomType TEXT,
+                                FOREIGN KEY(tag1Id) REFERENCES tags(id),
+                                FOREIGN KEY(tag2Id) REFERENCES tags(id)
+                )";
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        private void createUnavailableTimeSlotsOfRoomsTableIfEmpty()
+        {
+            {
+                string cs = @"URI=file:.\" + Utils.dbName + ".db";
+
+                using var con = new SQLiteConnection(cs);
+                con.Open();
+
+                using var cmd = new SQLiteCommand(con);
+
+                cmd.CommandText = @"CREATE TABLE  IF NOT EXISTS rooms_unavailable_slots (
+                                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                roomId INTEGER,
+                                dayId INTEGER,
+                                slotId INTEGER,
+                                FOREIGN KEY(roomId) REFERENCES rooms(roomID),
+                                FOREIGN KEY(dayId) REFERENCES Days(dayID),
+                                FOREIGN KEY(slotId) REFERENCES TimeSlots(slotID)
+                )";
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+
         // Create SQLite DB Conn
         private void setConnection()
         {
@@ -424,6 +487,44 @@ namespace Timetable_Management_System
 
 
         }
+
+        private void loadRoomTypesForConsecutiveSessiosnsData()
+        {
+            setConnection();
+            sql_conn.Open();
+            sql_cmd = sql_conn.CreateCommand();
+            string commandText =
+                 "select  t1.tag AS Session_1_Tag, t2.tag AS Session_2_Tag, srt.roomType from room_types_for_consecutive_sessions srt, tags t1, tags t2 WHERE srt.tag1Id = t1.id AND srt.tag2Id = t2.id ";
+
+            dbAdapter = new SQLiteDataAdapter(commandText, sql_conn);
+            suitableRoomTypesFoeConsecutiveSessionsDataSet.Reset();
+            dbAdapter.Fill(suitableRoomTypesFoeConsecutiveSessionsDataSet);
+            suitableRoomTypesFoeConsecutiveSessionsTable = suitableRoomTypesFoeConsecutiveSessionsDataSet.Tables[0];
+            consecutiveSessionsGrid.DataSource = suitableRoomTypesFoeConsecutiveSessionsTable;
+            sql_conn.Close();
+
+
+        }
+
+        private void loadRoomUnavailableSlotsData()
+        {
+            setConnection();
+            sql_conn.Open();
+            sql_cmd = sql_conn.CreateCommand();
+            string commandText =
+                 "select  srt.id AS ID, r.name AS Room_name, t.fullTime AS TimeSlot , d.day AS DAY from rooms_unavailable_slots srt, TimeSlots t, rooms r, Days d WHERE srt.slotId = t.slotID AND srt.roomId = r.roomID AND srt.dayId = d.dayID";
+
+            dbAdapter = new SQLiteDataAdapter(commandText, sql_conn);
+            suitableRoomUnavailbleSlotsDataSet.Reset();
+            dbAdapter.Fill(suitableRoomUnavailbleSlotsDataSet);
+            suitableRoomUnavailbleSlotsTable = suitableRoomUnavailbleSlotsDataSet.Tables[0];
+            unavailableTimeSlotsOfRoomsGrid.DataSource = suitableRoomUnavailbleSlotsTable;
+            sql_conn.Close();
+
+
+        }
+
+        
 
         private void loadBuildingsData()
         {
@@ -601,6 +702,10 @@ namespace Timetable_Management_System
             nav3comboRoomTypes.DisplayMember = "Name";
             nav3comboRoomTypes.ValueMember = "Value";
             nav3comboRoomTypes.DataSource = dataSource;
+
+            nav7roomTypeComboBox.DisplayMember = "Name";
+            nav7roomTypeComboBox.ValueMember = "Value";
+            nav7roomTypeComboBox.DataSource = dataSource;
         }
 
 
@@ -631,6 +736,18 @@ namespace Timetable_Management_System
             nav4TagsComboBox.DisplayMember = "tag";
             nav4TagsComboBox.ValueMember = "id";
             nav4TagsComboBox.DataSource = dt.Tables["Fleet"];
+
+
+            nav7TagsComboBox.DisplayMember = "tag";
+            nav7TagsComboBox.ValueMember = "id";
+            nav7TagsComboBox.DataSource = dt.Tables["Fleet"];
+
+            DataSet dt2 = new DataSet();
+            dbAdapter.Fill(dt2, "Fleet2");
+
+            nav7TagsComboBox2.DisplayMember = "tag";
+            nav7TagsComboBox2.ValueMember = "id";
+            nav7TagsComboBox2.DataSource = dt2.Tables["Fleet2"];
 
             sql_conn.Close();
         }
@@ -667,6 +784,10 @@ namespace Timetable_Management_System
             nav6RoomsComboBox.ValueMember = "roomID";
             nav6RoomsComboBox.DataSource = dt.Tables["Fleet"];
 
+            nav8RoomsComboBox.DisplayMember = "name";
+            nav8RoomsComboBox.ValueMember = "roomID";
+            nav8RoomsComboBox.DataSource = dt.Tables["Fleet"];
+
             sql_conn.Close();
         }
 
@@ -696,6 +817,57 @@ namespace Timetable_Management_System
             sql_conn.Close();
         }
 
+        private void loadTimeSlotsToComboBox()
+        {
+            setConnection();
+            sql_conn.Open();
+            sql_cmd = sql_conn.CreateCommand();
+            string commandText = "select * from TimeSlots";
+            dbAdapter = new SQLiteDataAdapter(commandText, sql_conn);
+
+            //Fill the DataTable with records from Table.
+            DataSet dt = new DataSet();
+            dbAdapter.Fill(dt, "Fleet");
+
+            //Insert the Default Item to DataTable.
+            /*DataRow row = dt.NewRow();
+            row[0] = 0;
+            row[1] = "Please select";
+            dt.Rows.InsertAt(row, 0);
+            */
+
+            nav8TimeSlotsComboBox.DisplayMember = "fullTime";
+            nav8TimeSlotsComboBox.ValueMember = "slotID";
+            nav8TimeSlotsComboBox.DataSource = dt.Tables["Fleet"];
+
+            sql_conn.Close();
+        }
+
+        private void loadDaysToComboBox()
+        {
+            setConnection();
+            sql_conn.Open();
+            sql_cmd = sql_conn.CreateCommand();
+            string commandText = "select * from Days";
+            dbAdapter = new SQLiteDataAdapter(commandText, sql_conn);
+
+            //Fill the DataTable with records from Table.
+            DataSet dt = new DataSet();
+            dbAdapter.Fill(dt, "Fleet");
+
+            //Insert the Default Item to DataTable.
+            /*DataRow row = dt.NewRow();
+            row[0] = 0;
+            row[1] = "Please select";
+            dt.Rows.InsertAt(row, 0);
+            */
+
+            nav8DaysComboBox.DisplayMember = "day";
+            nav8DaysComboBox.ValueMember = "dayID";
+            nav8DaysComboBox.DataSource = dt.Tables["Fleet"];
+
+            sql_conn.Close();
+        }
 
         private void loadSessionsToComboBox()
         {
@@ -903,6 +1075,76 @@ namespace Timetable_Management_System
             {
                 MessageBox.Show(" Form has some errors !");
             }
+        }
+
+        private void ConsecutiveSessions_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (true)
+            {
+                // Insert Room
+                string insertQ = "insert into room_types_for_consecutive_sessions (tag1Id, tag2Id, roomType  ) VALUES('" + nav7TagsComboBox.SelectedValue + "','" + nav7TagsComboBox2.SelectedValue  +"','"+nav7roomTypeComboBox.Text + "')";
+                executeQuery(insertQ);
+                loadRoomTypesForConsecutiveSessiosnsData();
+            }
+            else
+            {
+                MessageBox.Show(" Form has some errors !");
+            }
+        }
+
+        private void ManageRoomUnavailability_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (true)
+            {
+                // Insert Room
+                string insertQ = "insert into rooms_unavailable_slots (roomId, slotId, dayId  ) VALUES('" + nav8RoomsComboBox.SelectedValue + "','" + nav8TimeSlotsComboBox.SelectedValue +"','" + nav8DaysComboBox.SelectedValue + "')";
+                executeQuery(insertQ);
+                loadRoomUnavailableSlotsData();
+            }
+            else
+            {
+                MessageBox.Show(" Form has some errors !");
+            }
+        }
+
+        private void nav8RoomsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nav8DaysComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nav8TimeSlotsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label28_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
